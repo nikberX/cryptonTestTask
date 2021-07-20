@@ -46,7 +46,8 @@ class NewsItem extends StatelessWidget {
               Padding(
                 padding:EdgeInsets.only(
                   top: 9,
-                  left: 18),
+                  left: 18
+                ),
                 child: Text(
                   '${newsPost.user.firstName} ${newsPost.user.lastName}',
                   style: TextStyle(
@@ -62,6 +63,7 @@ class NewsItem extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.only(
+              top: 5,
               left: 14,
               bottom: 5),
             height: 93,

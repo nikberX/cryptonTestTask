@@ -13,12 +13,12 @@ class NewsList extends StatelessWidget {
     return ListView.builder( // Not empty, false
             itemCount: news.length + 1,
             itemBuilder: (context, index) {
-              if (index == 0) {
+              if (index == 0) { //dumb lifehack to scroll News label =-=
                 return Row(
                   children: [
                     Container(
                       color: Colors.transparent,
-                      margin: EdgeInsets.only(left: 58,top: 41, bottom: 33),
+                      margin: EdgeInsets.only(left: 58,top: 41 - 10, bottom: 33),
                       child: Text(
                         'News',
                         style: TextStyle(
@@ -34,7 +34,9 @@ class NewsList extends StatelessWidget {
                   ],
                 );
               }
-              return NewsItem(news[index-1]);
+              return NewsItem(news[index-1]); // to implement images-background NewsItem we can simply
+                                              //add ternary operator to check if photo is null
+                                              // ? NewsImageItem : NewsItem
             }
       );
   }

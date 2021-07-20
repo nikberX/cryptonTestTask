@@ -85,11 +85,73 @@ class NewsProvider with ChangeNotifier {
                 firstName: "Test",
                 lastName: "Test",
       ),
+    ),
+    NewsPost(
+      id: 592,
+      meta: [{'entries': [] }],
+      caption: 'This is news 5. Its bigger',
+      tags: [],
+      location: null,
+      userId: 59,
+      photoId: null,
+      createdAt: "2021-04-13T09:28:47.623Z",
+      updatedAt: "2021-04-13T09:28:47.623Z",
+      photo: null,
+      user: User(
+                id: 59,
+                username: "overetch_afe543",
+                avatar: null,
+                firstName: "Test",
+                lastName: "Test",
+      ),
+    ),
+    NewsPost(
+      id: 592,
+      meta: [{'entries': [] }],
+      caption: 'This is news 6. Its also bigger',
+      tags: [],
+      location: null,
+      userId: 59,
+      photoId: null,
+      createdAt: "2021-04-13T09:28:47.623Z",
+      updatedAt: "2021-04-13T09:28:47.623Z",
+      photo: null,
+      user: User(
+                id: 59,
+                username: "overetch_afe543",
+                avatar: null,
+                firstName: "Test",
+                lastName: "Test",
+      ),
+    ),
+    NewsPost(
+      id: 592,
+      meta: [{'entries': [] }],
+      caption: 'The last news at number 7.',
+      tags: [],
+      location: null,
+      userId: 59,
+      photoId: null,
+      createdAt: "2021-04-13T09:28:47.623Z",
+      updatedAt: "2021-04-13T09:28:47.623Z",
+      photo: null,
+      user: User(
+                id: 59,
+                username: "overetch_afe543",
+                avatar: null,
+                firstName: "Test",
+                lastName: "Test",
+      ),
+      
     )
   ];
 
   List<NewsPost> get news {
     return [..._news];
+  }
+
+  void fetchData() {
+    
   }
 
   
