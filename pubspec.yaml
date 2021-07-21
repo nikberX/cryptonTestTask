@@ -50,8 +50,6 @@ flutter:
   assets:
     - assets/images/like.png
     - assets/images/comment.png
-    - assets/images/avatar.svg
-    - assets/images/no_avatar.svg
     - assets/images/navbaricons/news.png
     - assets/images/navbaricons/training.png
     - assets/images/navbaricons/map.png

@@ -7,6 +7,7 @@ import '../widgets/news_list.dart';
 
 
 class NewsScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final newsData = Provider.of<NewsProvider>(context,listen: false);

@@ -40,7 +40,9 @@ class NewsItem extends StatelessWidget {
                 backgroundColor: Color(0xFFE74249),
                 child: CircleAvatar(
                   radius: 16,
-                  backgroundImage: NetworkImage('https://thumbs.dreamstime.com/z/darjeeling-image-beautiful-tea-garden-105271801.jpg'),
+                  backgroundImage: newsPost.photoId==null //Т.к. с api приходит json с null-ами для всех аватаров, берется id фотографии поста (просто чтобы показать работу)
+                  ? NetworkImage('https://image.shutterstock.com/image-vector/profile-placeholder-image-gray-silhouette-600w-1153673752.jpg')
+                  : NetworkImage('https://thumbs.dreamstime.com/z/darjeeling-image-beautiful-tea-garden-105271801.jpg'),
                 ),
               ),
               Padding(

@@ -18,143 +18,6 @@ class NewsProvider with ChangeNotifier {
   }
 
   List<NewsPost> _news = [
-    NewsPost(
-      id: 617,
-      meta: {'entries': [] },
-      caption: null,
-      tags: [],
-      location: null,
-      userId: 59,
-      photoId: "85910ce2-ba53-4080-bf39-91b9cdaaa324",
-      createdAt: "2021-05-06T10:00:01.384Z",
-      updatedAt: "2021-05-06T10:00:01.384Z",
-      photo:Photo(height: 1440,
-                  width: 1080,
-                  id: "85910ce2-ba53-4080-bf39-91b9cdaaa324"
-      ),
-      user: User(
-                id: 59,
-                username: "overetch_afe543",
-                avatar: null,
-                firstName: "Test",
-                lastName: "Test",
-      ),
-    ),
-    NewsPost(
-      id: 592,
-      meta: {'entries': [] },
-      caption: 'давно',
-      tags: [],
-      location: null,
-      userId: 59,
-      photoId: null,
-      createdAt: "2021-04-13T09:28:47.623Z",
-      updatedAt: "2021-04-13T09:28:47.623Z",
-      photo: null,
-      user: User(
-                id: 59,
-                username: "overetch_afe543",
-                avatar: null,
-                firstName: "Test",
-                lastName: "Test",
-      ),
-    ),
-    NewsPost(
-      id: 592,
-      meta: {'entries': [] },
-      caption: 'NEWS 3',
-      tags: [],
-      location: null,
-      userId: 59,
-      photoId: null,
-      createdAt: "2021-04-13T09:28:47.623Z",
-      updatedAt: "2021-04-13T09:28:47.623Z",
-      photo: null,
-      user: User(
-                id: 59,
-                username: "overetch_afe543",
-                avatar: null,
-                firstName: "Test",
-                lastName: "Test",
-      ),
-    ),
-    NewsPost(
-      id: 592,
-      meta: {'entries': [] },
-      caption: 'NEWS 4',
-      tags: [],
-      location: null,
-      userId: 59,
-      photoId: null,
-      createdAt: "2021-04-13T09:28:47.623Z",
-      updatedAt: "2021-04-13T09:28:47.623Z",
-      photo: null,
-      user: User(
-                id: 59,
-                username: "overetch_afe543",
-                avatar: null,
-                firstName: "Test",
-                lastName: "Test",
-      ),
-    ),
-    NewsPost(
-      id: 592,
-      meta: {'entries': [] },
-      caption: 'This is news 5. Its bigger',
-      tags: [],
-      location: null,
-      userId: 59,
-      photoId: null,
-      createdAt: "2021-04-13T09:28:47.623Z",
-      updatedAt: "2021-04-13T09:28:47.623Z",
-      photo: null,
-      user: User(
-                id: 59,
-                username: "overetch_afe543",
-                avatar: null,
-                firstName: "Test",
-                lastName: "Test",
-      ),
-    ),
-    NewsPost(
-      id: 592,
-      meta: {'entries': [] },
-      caption: 'This is news 6. Its also bigger',
-      tags: [],
-      location: null,
-      userId: 59,
-      photoId: null,
-      createdAt: "2021-04-13T09:28:47.623Z",
-      updatedAt: "2021-04-13T09:28:47.623Z",
-      photo: null,
-      user: User(
-                id: 59,
-                username: "overetch_afe543",
-                avatar: null,
-                firstName: "Test",
-                lastName: "Test",
-      ),
-    ),
-    NewsPost(
-      id: 592,
-      meta: {'entries': [] },
-      caption: 'The last news at number 7.',
-      tags: [],
-      location: null,
-      userId: 59,
-      photoId: null,
-      createdAt: "2021-04-13T09:28:47.623Z",
-      updatedAt: "2021-04-13T09:28:47.623Z",
-      photo: null,
-      user: User(
-                id: 59,
-                username: "overetch_afe543",
-                avatar: null,
-                firstName: "Test",
-                lastName: "Test",
-      ),
-      
-    )
   ];
 
   List<NewsPost> get news {
@@ -164,11 +27,9 @@ class NewsProvider with ChangeNotifier {
   Future<void> fetchData() async {
     List<NewsPost> fetchedNews = [];
 
-    const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTksImlhdCI6MTYyMDQ5MTYxNCwiZXhwIjoxMDAxNjIwNDkxNjE0fQ.zGqmT0dH2bUMkG5DltUciML5CCXDbXsdO3p5a6AH5Z8';
-
     const urlGet = 'https://app.ferfit.club/api/feed?limit=10&offset=0&maxDate=2021-05-06T18:26:42.820994';
     try {
-    final response = await http.get(
+      final response = await http.get(
         Uri.parse(urlGet),
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $_accessToken'
@@ -178,23 +39,12 @@ class NewsProvider with ChangeNotifier {
       var decoded = json.decode(response.body);
 
       for(int i=0;i<decoded['result']['count'];++i) {
-        print('Number of post: $i : ');
-        var post = decoded['result']['posts'][i];
-        print(post['id']);
-        print(post['meta']);
-        print(post['caption']);
-        print([...post['tags']]);
-        print(post['location']);
-        print(post['userId']);
-        print(post['photoId']);
-        print(post['createdAt']);
-        print(post['user']['id']);
-        print(post['user']['firstName']);
-        print(post['user']['lastName']);
-        print(post['user']['username']);
-        print('======================\n');
-        print('fetching');
         var currentPost = decoded['result']['posts'][i];
+        Photo? postPhoto = currentPost['photo'] == null ? null : Photo(
+          height: currentPost['photo']['height'], 
+          width: currentPost['photo']['width'], 
+          id: currentPost['photo']['id']
+        );
         fetchedNews.add(NewsPost(
             id: currentPost['id'],
             meta: currentPost['meta'],
@@ -205,11 +55,7 @@ class NewsProvider with ChangeNotifier {
             photoId: currentPost['photoId']=='null' ? null : currentPost['photoId'],
             createdAt: currentPost['createdAt'],
             updatedAt: currentPost['updatedAt'],
-            photo: Photo(
-              height: 0,
-              width: 0,
-              id: '123'
-            ),
+            photo: postPhoto,
             user: User(
               id: currentPost['user']['id'],
               avatar: null, //В ответе с API нет примера как выглядит поле avatar (id? Набор значений?)
@@ -220,15 +66,8 @@ class NewsProvider with ChangeNotifier {
           )
         );//add
       }//for
-      print('fetched');
-
-        
-      
-
       _news.clear();
-      print('old cleared');
       _news.addAll(fetchedNews);
-      print('added');
       notifyListeners();
     } 
     catch (error) {throw error;}
@@ -247,12 +86,10 @@ class NewsProvider with ChangeNotifier {
     )
     .catchError((error) => throw error)
     .then((responce) {
-        //print(jsonDecode(responce.body));
         var newToken = jsonDecode(responce.body)['result']['access'];
         _accessToken = (_accessToken == null) || (_accessToken!=newToken)
         ? jsonDecode(responce.body)['result']['access'] 
         : _accessToken;
-        print('token: $_accessToken');
       }
     );
   }

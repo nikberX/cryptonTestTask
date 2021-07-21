@@ -23,11 +23,14 @@ class _NewsListState extends State<NewsList> {
 
   @override
   Widget build(BuildContext context) {
-    print(' NEWS LIST BUILD');
-    final newsData = Provider.of<NewsProvider>(context,listen: true);
+    //print('NewsListBuild');
+    final newsData = Provider.of<NewsProvider>(context, listen: true);
     final news = newsData.news;
+    //when data is updated widget gets notified.
     if (news.isNotEmpty) {_loaded();}
-    return isLoading ? Center(child: CircularProgressIndicator()) : ListView.builder( // Not empty, false
+    return isLoading 
+    ? Center(child: CircularProgressIndicator()) 
+    : ListView.builder( // Not empty, false
             itemCount: news.length + 1,
             itemBuilder: (context, index) {
               if (index == 0) { //dumb lifehack to scroll News label =-=

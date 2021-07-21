@@ -17,6 +17,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+
   final List<Widget> _pages = [
     NewsScreen(),
     DietaryScreen(),
@@ -33,6 +34,8 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -47,7 +50,6 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.white,
         elevation: 5,
         unselectedFontSize: 0,
-        //selectedItemColor: Color(0xFFD1414F),
         unselectedItemColor: Color(0xFFCED0D5),
         fixedColor: Color(0xFFD1414F),
         selectedLabelStyle: TextStyle(
@@ -60,28 +62,28 @@ class _MainScreenState extends State<MainScreen> {
         showUnselectedLabels: false,
         currentIndex: _selectedPageIndex,
         items: [
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: ImageIcon(
               AssetImage('assets/images/navbaricons/news.png')), //Color(0xFFCED0D5)
             label: 'News',
             backgroundColor: Colors.white
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/images/navbaricons/dietary.png')),
             label: 'Dietary',
             backgroundColor: Colors.white
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/images/navbaricons/chat.png')),
             label: 'Chat',
             backgroundColor: Colors.white
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/images/navbaricons/training.png')),
             label: 'Training',
             backgroundColor: Colors.white
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/images/navbaricons/map.png')),
             label: 'Map',
             backgroundColor: Colors.white
