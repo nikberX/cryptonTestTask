@@ -6,7 +6,7 @@ import './user.dart';
 
 class NewsPost {
   int id;
-  List<Map<String, Object>> meta;
+  Map<String, dynamic> meta;
   String? caption;
   List<String> tags;
   String? location;
@@ -30,4 +30,5 @@ class NewsPost {
     this.photo ,
     required this.user,
   });
+  
 }

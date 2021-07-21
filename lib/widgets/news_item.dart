@@ -12,7 +12,7 @@ class NewsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    var captionText = newsPost.caption == null ? ' ' :'${newsPost.caption}';
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -71,7 +71,7 @@ class NewsItem extends StatelessWidget {
               alignment: Alignment.topLeft,
               fit: BoxFit.scaleDown,
               child: Text(
-                '${newsPost.caption}',
+                '${captionText}',
                 style: TextStyle(
                   color: Color(0xFF4D545C),
                   fontSize: 16,

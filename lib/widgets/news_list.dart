@@ -4,13 +4,30 @@ import 'package:provider/provider.dart';
 import '../providers/news_provider.dart';
 import './news_item.dart';
 
-class NewsList extends StatelessWidget {
+class NewsList extends StatefulWidget {
+
+  @override
+  _NewsListState createState() => _NewsListState();
+}
+
+
+class _NewsListState extends State<NewsList> {
+  bool isLoading = true;
+  bool isInit = false;
+
+  void _loaded() {
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final newsData = Provider.of<NewsProvider>(context);
+    print(' NEWS LIST BUILD');
+    final newsData = Provider.of<NewsProvider>(context,listen: true);
     final news = newsData.news;
-    return ListView.builder( // Not empty, false
+    if (news.isNotEmpty) {_loaded();}
+    return isLoading ? Center(child: CircularProgressIndicator()) : ListView.builder( // Not empty, false
             itemCount: news.length + 1,
             itemBuilder: (context, index) {
               if (index == 0) { //dumb lifehack to scroll News label =-=
