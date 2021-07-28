@@ -40,31 +40,7 @@ class NewsProvider with ChangeNotifier {
 
       for(int i=0;i<decoded['result']['count'];++i) {
         var currentPost = decoded['result']['posts'][i];
-        Photo? postPhoto = currentPost['photo'] == null ? null : Photo(
-          height: currentPost['photo']['height'], 
-          width: currentPost['photo']['width'], 
-          id: currentPost['photo']['id']
-        );
-        fetchedNews.add(NewsPost(
-            id: currentPost['id'],
-            meta: currentPost['meta'],
-            caption: currentPost['caption']=='null' ? null : currentPost['caption'],
-            tags: [...currentPost['tags']],
-            location: currentPost['location']=='null' ? null : currentPost['location'],
-            userId: currentPost['userId'],
-            photoId: currentPost['photoId']=='null' ? null : currentPost['photoId'],
-            createdAt: currentPost['createdAt'],
-            updatedAt: currentPost['updatedAt'],
-            photo: postPhoto,
-            user: User(
-              id: currentPost['user']['id'],
-              avatar: null, //В ответе с API нет примера как выглядит поле avatar (id? Набор значений?)
-              firstName: currentPost['user']['firstName'],
-              lastName: currentPost['user']['lastName'],
-              username: currentPost['user']['username'],
-            ),
-          )
-        );//add
+        fetchedNews.add(NewsPost.fromJson(currentPost));
       }//for
       _news.clear();
       _news.addAll(fetchedNews);
