@@ -29,12 +29,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return;
     };
     setState(() {
+
       isSignInActive = true;
     });
   }
 
-  void _validate(BuildContext context) {
-    if (_loginController.text.isEmpty || _passwordController.text.isEmpty) return;
+  bool _validate() {
+    if (_loginController.text.isEmpty || _passwordController.text.isEmpty) return false;
     
     RegExp loginValidation = RegExp(r"[^A-z_]", caseSensitive: false,); //finds all non-latin and non '_' symbols
                                                                         // if match - login denied
@@ -42,22 +43,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
     var res = loginValidation.firstMatch(_loginController.text);
 
     if (res != null) {
-      return; 
+      return false; 
     }
 
     bool passwordFailed = ((-1<_passwordController.text.indexOf(' '))||
                            (_passwordController.text.length < 3)||
                            (_passwordController.text.length > 9));
     if (passwordFailed) {
-      return;
+      return false;
     }
 
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: 
+    return true;
+  }
+
+  void logIn(BuildContext context) {
+
+    if (_validate()) {
+
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: 
       (_) {
         return MainScreen();
       }
-    ));
-    //print('logged in');
+      ));
+    }
   }
 
   @override
@@ -185,9 +193,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               SignInButton(
                                 height: mediaQuery.size.height, 
                                 width: mediaQuery.size.width,
-                                onTap: _validate,
+                                onTap: logIn,
                                 isActive: isSignInActive,
                               ),
+
+
                               SizedBox(height: mediaQuery.size.height * 0.046153),
                               Padding(
                                 padding: EdgeInsets.only(bottom: 2),
