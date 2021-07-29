@@ -29,7 +29,7 @@ class SignInButton extends StatelessWidget {
           ]
         )
       ),
-      child: Container( 
+      child: SizedBox( 
          width: width * 0.74444,
          height: height * 0.081538,
          //Log in

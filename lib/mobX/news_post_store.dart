@@ -16,6 +16,4 @@
 // // The store-class
 // abstract class _NewsPostStore with Store {
 
-  
-
 // }

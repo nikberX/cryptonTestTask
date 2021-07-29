@@ -23,18 +23,14 @@ abstract class _NewsStore with Store {
 
   bool isLoading = false;
 
-  @observable
+  @observable 
   List<NewsPost> news = [];
 
   @action
   Future<void> fetchData() async {
-    news.clear();
-    news = [];
-
     const String urlGet =
         'https://app.ferfit.club/api/feed?limit=10&offset=0&maxDate=2021-05-06T18:26:42.820994';
-
-    List<NewsPost> fetchedNews = [];
+    news.clear();
     try {
       final response = await http.get(Uri.parse(urlGet),
           headers: {HttpHeaders.authorizationHeader: 'Bearer $_accessToken'});
@@ -43,11 +39,9 @@ abstract class _NewsStore with Store {
 
       for (int i = 0; i < decoded['result']['count']; ++i) {
         var currentPost = decoded['result']['posts'][i];
-        fetchedNews.add(NewsPost.fromJson(currentPost));
+        news.add(NewsPost.fromJson(currentPost));
       } 
-      
-      news = fetchedNews;
-
+      news = news;
     } catch (error) {
       throw error;
     }
