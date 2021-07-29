@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../widgets/news_list.dart';
 import './news_screen.dart';
 import './dietary_screen.dart';
 import './map_screen.dart';

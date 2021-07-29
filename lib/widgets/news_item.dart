@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-
 import '../models/news_post.dart';
-import '../models/user.dart';
-import '../models/photo.dart';
 
 class NewsItem extends StatelessWidget {
   final NewsPost newsPost;
@@ -73,7 +70,7 @@ class NewsItem extends StatelessWidget {
               alignment: Alignment.topLeft,
               fit: BoxFit.scaleDown,
               child: Text(
-                '${captionText}',
+                '$captionText',
                 style: TextStyle(
                   color: Color(0xFF4D545C),
                   fontSize: 16,
