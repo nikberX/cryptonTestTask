@@ -68,6 +68,171 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
+  Widget _buildLoginLabel(MediaQueryData mediaQuery) {
+    return Row(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 16),
+          child: SizedBox( //container for login label
+            height: mediaQuery.size.height * 0.03384,
+            width: mediaQuery.size.width * 0.21388,
+            child: Text( //login label with style
+                'Login',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                ),
+            ),
+          ),
+        ),
+        Spacer()
+      ],
+      );
+  }
+
+  List<Widget> _buildEULA() {
+    return [
+      Padding(
+      padding: EdgeInsets.only(bottom: 2),
+      child: Text('Регистрируясь вы принимаете наши условия:',
+          style: TextStyle(
+            color: Color(0xFF4D545C),
+            fontSize: 12,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w400,
+            fontStyle: FontStyle.normal,
+          ),
+        ),
+      ),
+      Text('политику использования данных', //wrap with InkWell(ontap: () => launch(url))
+          style: TextStyle(                 //to create hyperlink
+            color: Color(0xFF0290E0),
+            fontSize: 12,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w400,
+            fontStyle: FontStyle.normal,
+            decoration: TextDecoration.underline
+          ),
+      ),
+      Text('политику в отношении файлов cookie', //wrap with InkWell(ontap: () => launch(url))
+          style: TextStyle(                      //to create hyperlink
+            color: Color(0xFF0290E0),
+            fontSize: 12,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w400,
+            fontStyle: FontStyle.normal,
+            decoration: TextDecoration.underline
+          ),
+        ),
+    ];
+  }
+
+  List<Widget> _buildInputs(MediaQueryData mediaQuery){
+    return [
+      Text('Nickname',
+          style: TextStyle(
+            color: Color(0xFFCED0D5),
+            fontSize: 12,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w400,
+            fontStyle: FontStyle.normal,
+          ),
+      ),
+      Container(//nickname input
+        height: mediaQuery.size.height * 0.041538,
+        child: TextField(
+          onChanged: (_) => _inputChanged(),
+          controller: _loginController,
+        )
+      ),
+      SizedBox(//spacing between inputs
+        height: mediaQuery.size.height * 0.043076,
+      ),
+      Text('Password', //label for password input
+          style: TextStyle(
+            color: Color(0xFFCED0D5),
+            fontSize: 12,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w400,
+            fontStyle: FontStyle.normal,
+          ),
+      ),
+      Container( //password input
+        height: mediaQuery.size.height * 0.041538,
+        child: TextField(
+          onChanged: (_) => _inputChanged(),
+          obscureText: true,
+          controller: _passwordController,
+          
+        )
+      )
+    ];
+  }
+
+  Widget _buildInputForm(MediaQueryData mediaQuery) {
+    return Container( //Container for input form
+      height: mediaQuery.size.height * 0.57846,
+      width: mediaQuery.size.width * 0.91111,
+      decoration: BoxDecoration( //decoration for container. Rounded corners
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(40),
+          bottomRight: Radius.circular(40),
+          topRight: Radius.circular(4),
+          bottomLeft: Radius.circular(4)
+        )
+      ),
+      child: SingleChildScrollView( //fixes keyboard overlapping
+        child: Padding(//top spacing
+          padding: EdgeInsets.only(
+            top: 48,
+            left: 30,
+            right: 30,
+            bottom: 34
+          ),
+          child: Column(//label for nickname input
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              ..._buildInputs(mediaQuery),
+              //spacing between button and input
+              SizedBox(height: mediaQuery.size.height * 0.067692,),
+
+              SignInButton(
+                height: mediaQuery.size.height, 
+                width: mediaQuery.size.width,
+                onTap: logIn,
+                isActive: isSignInActive,
+              ),
+              SizedBox(height: mediaQuery.size.height * 0.046153),
+              ..._buildEULA()
+              
+            ]
+          )
+        )
+      ),
+    );
+  }
+
+  Widget _buildLayout(MediaQueryData mediaQuery) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        SizedBox( //top spacing to lower 'Login' label
+          height:  mediaQuery.size.height * 0.06307,
+        ),
+        _buildLoginLabel(mediaQuery),
+        SizedBox( //spacing between login label and input form
+          height: mediaQuery.size.height * 0.11384
+        ),
+        _buildInputForm(mediaQuery),
+    ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -95,152 +260,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Container(
                 width: mediaQuery.size.width,
                 height: mediaQuery.size.height,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox( //top spacing to lower 'Login' label
-                      height:  mediaQuery.size.height * 0.06307,
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 16),
-                          child: SizedBox( //container for login label
-                            height: mediaQuery.size.height * 0.03384,
-                            width: mediaQuery.size.width * 0.21388,
-                            child: Text( //login label with style
-                                'Login',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                ),
-                            ),
-                          ),
-                        ),
-                        Spacer()
-                      ],
-                    ),
-                    SizedBox( //spacing between login label and input form
-                      height: mediaQuery.size.height * 0.11384
-                    ),
-                    Container( //Container for input form
-                      height: mediaQuery.size.height * 0.57846,
-                      width: mediaQuery.size.width * 0.91111,
-                      decoration: BoxDecoration( //decoration for container. Rounded corners
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40),
-                          bottomRight: Radius.circular(40),
-                          topRight: Radius.circular(4),
-                          bottomLeft: Radius.circular(4)
-                        )
-                      ),
-                      child: SingleChildScrollView( //fixes keyboard overlapping
-                        child: Padding(//top spacing
-                          padding: EdgeInsets.only(
-                            top: 48,
-                            left: 30,
-                            right: 30,
-                            bottom: 34
-                          ),
-                          child: Column(//label for nickname input
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Text('Nickname',
-                                  style: TextStyle(
-                                    color: Color(0xFFCED0D5),
-                                    fontSize: 12,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                  ),
-                              ),
-                              Container(//nickname input
-                                height: mediaQuery.size.height * 0.041538,
-                                child: TextField(
-                                  onChanged: (_) => _inputChanged(),
-                                  controller: _loginController,
-                                )
-                              ),
-                              SizedBox(//spacing between inputs
-                                height: mediaQuery.size.height * 0.043076,
-                              ),
-                              Text('Password', //label for password input
-                                  style: TextStyle(
-                                    color: Color(0xFFCED0D5),
-                                    fontSize: 12,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                  ),
-                              ),
-                              Container( //password input
-                                height: mediaQuery.size.height * 0.041538,
-                                child: TextField(
-                                  onChanged: (_) => _inputChanged(),
-                                  obscureText: true,
-                                  controller: _passwordController,
-                                  
-                                )
-                              ),
-                              //spacing between button and input
-                              SizedBox(height: mediaQuery.size.height * 0.067692,),
-
-                              SignInButton(
-                                height: mediaQuery.size.height, 
-                                width: mediaQuery.size.width,
-                                onTap: logIn,
-                                isActive: isSignInActive,
-                              ),
-
-
-                              SizedBox(height: mediaQuery.size.height * 0.046153),
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 2),
-                                child: Text('Регистрируясь вы принимаете наши условия:',
-                                    style: TextStyle(
-                                      color: Color(0xFF4D545C),
-                                      fontSize: 12,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w400,
-                                      fontStyle: FontStyle.normal,
-                                    ),
-                                ),
-                              ),
-                              Text('политику использования данных', //wrap with InkWell(ontap: () => launch(url))
-                                  style: TextStyle(                 //to create hyperlink
-                                    color: Color(0xFF0290E0),
-                                    fontSize: 12,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                    decoration: TextDecoration.underline
-                                  ),
-                              ),
-                              Text('политику в отношении файлов cookie', //wrap with InkWell(ontap: () => launch(url))
-                                  style: TextStyle(                      //to create hyperlink
-                                    color: Color(0xFF0290E0),
-                                    fontSize: 12,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                    decoration: TextDecoration.underline
-                                  ),
-                              ),
-                             
-                            ]
-                          )
-                        )
-                      ),
-                  ),
-                  
-            
-                ],
-          ),
+                child: _buildLayout(mediaQuery),
               ),
             )
             

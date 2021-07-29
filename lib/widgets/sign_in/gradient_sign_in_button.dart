@@ -53,39 +53,6 @@ class SignInButton extends StatelessWidget {
           ),
         ),
       ),
-    )
-    // :
-    // DecoratedBox( //custom button to sign in (gradient)
-    //   decoration: BoxDecoration(
-    //     borderRadius: BorderRadius.all(Radius.circular(3)),
-    //     gradient: LinearGradient(
-    //       begin: Alignment.topRight,
-    //       end: Alignment.bottomLeft,
-    //       colors: [
-    //         Colors.grey,
-    //         Colors.blueGrey
-    //       ],
-    //       stops: [0,1],
-    //     )
-    //   ),
-    //   child: Container( 
-    //      width: width * 0.74444,
-    //      height: height * 0.081538,
-    //      //Log in
-    //     child: Center(
-    //       child: Text(//button label
-    //         'Sign in', 
-    //         style: TextStyle(
-    //           color: Colors.white,
-    //           fontSize: 18,
-    //           fontFamily: 'Roboto',
-    //           fontWeight: FontWeight.w400,
-    //           fontStyle: FontStyle.normal,
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // )
-    ;
+    );
   }
 }
