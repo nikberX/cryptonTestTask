@@ -18,11 +18,9 @@ class NewsList extends StatelessWidget {
             child: CircularProgressIndicator(),
           )
         : ListView.builder(
-            itemCount: newsStore.news.length + 1,
+            itemCount: newsStore.news.length,
             itemBuilder: (context, index) {
-              return index == 0 
-              ? NewsLabel()
-              : NewsItem(newsStore.news[index-1]);          
+              return NewsItem(newsStore.news[index]);          
             }     
           )
     );

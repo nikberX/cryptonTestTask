@@ -1,3 +1,4 @@
+import 'package:crypton_test_task/widgets/news_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,15 +11,16 @@ class NewsScreen extends StatelessWidget {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ));
-    return Container(
-      child: SingleChildScrollView(
-        child: Container(
-          height: 680,
-          child: Center(
-          child: NewsList(),
-          ),
-      ),
-      )
+    return SingleChildScrollView(
+      child : Column(
+          children: <Widget> [
+            NewsLabel(),
+            Container(
+              height: MediaQuery.of(context).size.height*0.9,
+              child: NewsList()
+            ),
+          ]
+        ),
     );
   }
 }

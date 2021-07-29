@@ -12,13 +12,13 @@ mixin _$NewsStore on _NewsStore, Store {
   final _$newsAtom = Atom(name: '_NewsStore.news');
 
   @override
-  List<NewsPost> get news {
+  ObservableList<NewsPost> get news {
     _$newsAtom.reportRead();
     return super.news;
   }
 
   @override
-  set news(List<NewsPost> value) {
+  set news(ObservableList<NewsPost> value) {
     _$newsAtom.reportWrite(value, super.news, () {
       super.news = value;
     });
