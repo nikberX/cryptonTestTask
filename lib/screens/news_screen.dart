@@ -12,15 +12,12 @@ class NewsScreen extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
     ));
     return SingleChildScrollView(
-      child : Column(
-          children: <Widget> [
-            NewsLabel(),
-            Container(
-              height: MediaQuery.of(context).size.height*0.9,
-              child: NewsList()
-            ),
-          ]
-        ),
+      child: Column(children: <Widget>[
+        NewsLabel(),
+        Container(
+            height: MediaQuery.of(context).size.height * 0.9,
+            child: NewsList()),
+      ]),
     );
   }
 }

@@ -9,32 +9,38 @@ part of 'news_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$NewsStore on _NewsStore, Store {
-  final _$newsAtom = Atom(name: '_NewsStore.news');
+  final _$newsPostsAtom = Atom(name: '_NewsStore.newsPosts');
 
   @override
-  ObservableList<NewsPost> get news {
-    _$newsAtom.reportRead();
-    return super.news;
+  ObservableFuture<List<NewsPost>>? get newsPosts {
+    _$newsPostsAtom.reportRead();
+    return super.newsPosts;
   }
 
   @override
-  set news(ObservableList<NewsPost> value) {
-    _$newsAtom.reportWrite(value, super.news, () {
-      super.news = value;
+  set newsPosts(ObservableFuture<List<NewsPost>>? value) {
+    _$newsPostsAtom.reportWrite(value, super.newsPosts, () {
+      super.newsPosts = value;
     });
   }
 
-  final _$fetchDataAsyncAction = AsyncAction('_NewsStore.fetchData');
+  final _$_NewsStoreActionController = ActionController(name: '_NewsStore');
 
   @override
-  Future<void> fetchData() {
-    return _$fetchDataAsyncAction.run(() => super.fetchData());
+  Future<dynamic> fetchNews() {
+    final _$actionInfo =
+        _$_NewsStoreActionController.startAction(name: '_NewsStore.fetchNews');
+    try {
+      return super.fetchNews();
+    } finally {
+      _$_NewsStoreActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
-news: ${news}
+newsPosts: ${newsPosts}
     ''';
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -11,18 +12,26 @@ class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final newsStore = Provider.of<StoreProvider>(context).getNewsStore();
-    newsStore.tryGetAccessToken().then((_) => newsStore.fetchData());
+    newsStore.fetchNews();
+    final future = newsStore.newsPosts;
     return Observer(
-      builder: (_) => newsStore.news.isEmpty
-        ? Center(
-            child: CircularProgressIndicator(),
-          )
-        : ListView.builder(
-            itemCount: newsStore.news.length,
-            itemBuilder: (context, index) {
-              return NewsItem(newsStore.news[index]);          
-            }     
-          )
+      builder: (_) {
+        switch (future!.status) {
+          case FutureStatus.pending:
+            return Center(child: CircularProgressIndicator());
+          case FutureStatus.fulfilled:
+            return ListView.builder(
+              itemCount: future.result.length,
+              itemBuilder: (context, index) {
+                return NewsItem(future.result[index]);          
+            });
+          case FutureStatus.rejected:
+            return Text('Oops. An error ocured');    
+          default:
+            return Container();
+        }
+      
+      }
     );
   }
 }
